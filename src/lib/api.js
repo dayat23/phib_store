@@ -1,6 +1,11 @@
 import { error } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 
-const base = 'http://localhost:3000/api';
+if (dev) {
+	const base = 'http://localhost:3000/api';
+} else {
+	const base = 'http://localhost:3000/api';
+}
 
 async function send({ method, path, data, token }) {
 	const opts = { method, headers: {} };

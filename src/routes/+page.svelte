@@ -1,5 +1,7 @@
-<div class="p5 rounded">
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import { dev } from '$app/environment';
+</script>
+<div class="col-lg-8 mx-auto p-4 py-md-5">
+    <h1>Hello World!</h1>
+    <p>Development mode is {dev}</p>
 </div>
