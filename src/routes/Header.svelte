@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+  import { enhance } from '$app/forms';
 </script>
 
 <header class="p-3 text-bg-dark">
@@ -10,8 +11,14 @@
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="/" class="nav-link px-2 {$page.url.pathname === '/'? 'text-secondary' : 'text-white'}">Home</a></li>
-        <li><a href="/login" class="btn btn-outline-light me-2">Login</a></li>
-        <li><a href="/" class="btn btn-warning">Sign-up</a></li>
+        {#if $page.data.user}
+          <form use:enhance method="POST" action="?/logout">
+            <button class="btn btn-danger">Logout</button>
+          </form>
+        {:else}
+          <li><a href="/login" class="btn btn-outline-light me-2">Login</a></li>
+          <li><a href="/signup" class="btn btn-warning">Sign-up</a></li>
+        {/if}
       </ul>
     </div>
   </div>

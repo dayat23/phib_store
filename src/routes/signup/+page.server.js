@@ -2,8 +2,9 @@ import { fail, redirect } from '@sveltejs/kit';
 import * as api from '$lib/api.js';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ locals }) {
-	if (locals.user) throw redirect(307, '/');
+export async function load({ parent }) {
+	const { user } = await parent();
+	if (user) throw redirect(307, '/');
 }
 
 /** @type {import('./$types').Actions} */
@@ -11,19 +12,19 @@ export const actions = {
 	default: async ({ cookies, request }) => {
 		const data = await request.formData();
 
-		const form = {
+		const user = {
 			email: data.get('email'),
+			first_name: data.get('first_name'),
+			last_name: data.get('last_name'),
 			password: data.get('password')
-		}
-		const body = await api.post('auth/login', form);
-        console.log('===== response login', body);
-        console.log('===== response login errors', body.errors);
+		};
+
+		const body = await api.post('auth/register', user);
+        console.log('===== response register', body);
+        console.log('===== response register errors', body.errors);
 		if (body.errors) {
 			return fail(401, body);
 		}
-
-		const value = btoa(JSON.stringify(body));
-		cookies.set('jwt', value, { path: '/' });
 
 		throw redirect(307, '/');
 	}

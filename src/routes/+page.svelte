@@ -1,11 +1,13 @@
 <script>
-    import { dev } from '$app/environment';
+    import { page } from '$app/stores';
     import UserList from '$lib/UserList/index.svelte';
 
     /** @type {import('./$types').PageData} */
 	export let data;
 </script>
-<div class="col-lg-8 mx-auto p-4 py-md-5">
+
+{#if $page.data.user}
+  <div class="col-lg-8 mx-auto p-4 py-md-5">
     <table class="table">
         <thead>
           <tr>
@@ -18,4 +20,9 @@
             <UserList users={data.users} />
         </tbody>
     </table>
-</div>
+  </div>
+{:else}
+  <div class="col-lg-8 mx-auto p-4 py-md-5">
+    <h1>Hello World!</h1>
+  </div>
+{/if}

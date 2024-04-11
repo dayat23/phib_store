@@ -1,5 +1,3 @@
-import * as api from '$lib/api.js';
-import { fail, redirect } from '@sveltejs/kit';
 import { get_users } from './get_users.js';
 
 /** @type {import('./$types').PageServerLoad} */

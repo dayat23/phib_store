@@ -19,6 +19,8 @@ async function send({ method, path, data, token }) {
 	}
 
 	const res = await fetch(`${base}/${path}`, opts);
+	console.log("===== API response", res);
+	console.log("===== API response status", res.status);
 	if (res.ok || res.status === 422) {
 		const text = await res.text();
 		return text ? JSON.parse(text) : {};
