@@ -1,10 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 
+let base = 'https://phib-store-api.shuttleapp.rs/api';
 if (dev) {
-	const base = 'http://localhost:3000/api';
-} else {
-	const base = 'http://localhost:3000/api';
+	base = 'http://localhost:3000/api';
 }
 
 async function send({ method, path, data, token }) {
